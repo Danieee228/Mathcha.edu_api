@@ -133,8 +133,7 @@ export default function CreatePage() {
       }
     }
     if (name === "title") {
-      const alphanumericRegex = /^[a-zA-Z0-9]*$/;
-      if (!alphanumericRegex.test(value)) {
+      if (value.startsWith(" ")) {
         setFormErrors({
           ...formErrors,
           title: "Tên khóa học không thể bắt đầu bằng khoảng trắng",
