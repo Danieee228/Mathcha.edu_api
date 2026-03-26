@@ -91,8 +91,15 @@ export default function CreatePage() {
       setFormErrors(errors);
       return;
     }
+
     try {
-      const res = await api.post(`/course/user/${user.user_id}`, formData);
+      const payload = { ...formData };
+      delete payload.is_finish;
+      payload.category_id = parseInt(payload.category_id, 10);
+      if (payload.status === null) {
+        payload.status = true;
+      }
+      const res = await api.post(`/course/user/${user.user_id}`, payload);
       const courseId = res.data.data.course_id;
       toast.success("Tạo khóa học thành công !");
       navigate("/content-manager/update/" + courseId);
