@@ -1,13 +1,12 @@
 import axios from "axios";
-const baseUrl = "http://localhost:8080";
-// const baseUrl = "http://159.223.39.71:8080";
+const baseURL = process.env.REACT_APP_API_URL;
 
 const config = {
-  baseUrl,
+  baseURL: baseURL,
   timeout: 3000000,
 };
 const api = axios.create(config);
-api.defaults.baseURL = baseUrl;
+api.defaults.baseURL = baseURL;
 const handleBefore = (config) => {
   const token = localStorage.getItem("token")?.replaceAll('"', "");
   config.headers["Authorization"] = `Bearer ${token}`;
